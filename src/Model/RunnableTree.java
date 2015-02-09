@@ -2,23 +2,43 @@ package Model;
 
 import Model.BinarySearchTree;
 
-public class RunnableTree<E extends Comparable<E>> implements Runnable {
+import java.util.Random;
+
+public class RunnableTree implements Runnable {
 	
-	private BinarySearchTree<E> tree;
-	private E add;
+	private BinarySearchTree tree;
+	//private E add;
+	private int nbNode;
 	
-	public RunnableTree(BinarySearchTree<E> tree, E a)
+	public RunnableTree(BinarySearchTree tree, int a)
 	{
 		this.tree = tree;
-		this.add = a;
+		this.nbNode = a;
 	}
 	
 	
 	public void run()
 	{
-		tree.add(add);
-		System.out.print("Ajout de :" +  add + "\n");
+		String randomName;
+		for(int i =0; i<nbNode ; i++){
+			randomName = generate(10);
+			if(tree.add(randomName))
+			System.out.print(i+1 +". Ajout de :" +  randomName + "\n");
+			else System.out.println(randomName + " already exist.");
+		}
+	}
 
+	// Code from http://www.developpez.net/forums/d120817/java/general-java/generer-chaine-aleatoire/
+	public String generate(int length)
+	{
+		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+		String pass = "";
+		for(int x=0;x<length;x++)
+		{
+			int i = (int)Math.floor(Math.random() * 62);
+			pass += chars.charAt(i);
+		}
+		return pass;
 	}
 	
 	

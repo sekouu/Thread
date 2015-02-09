@@ -28,8 +28,11 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Time;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import Model.BinarySearchTree;
 import Model.RunnableTree;
@@ -38,29 +41,32 @@ import Test.ThreadTest;
 public class Main {
   
   public static final void main(String[] args) throws IOException {
+
     String name = "rbtree";
 
     Random rand = new Random();
 
     BinarySearchTree<Integer> rbtree = new BinarySearchTree<Integer>();
 
-    Thread threads [] = new Thread [85];
+    Thread threads [] = new Thread [100];
 
-    System.out.println("How many threads do you want to use :");
-    Scanner scanner = new Scanner(System.in);
-
-    int thread_number = scanner.nextInt();
-    
-    
-    for (int i =0; i<thread_number; i++)
-    {
-    	threads[i] = new Thread (new RunnableTree(rbtree, rand.nextInt(thread_number)+1));
-    	threads[i].start();
-    	System.out.println(threads[i].getState());
-    	System.out.println(i);
-    
-   
+    int thread_number = 101;
+    while (thread_number > 100){
+      System.out.println("How many threads do you want to use (less than 100):");
+      Scanner scanner = new Scanner(System.in);
+      thread_number = scanner.nextInt();
     }
+
+
+
+    int nbObjectAdd = rand.nextInt(100);
+    System.out.println("There is " + nbObjectAdd + " object add to the graphe");
+    ExecutorService service = Executors.newFixedThreadPool(thread_number);
+    service.execute(new RunnableTree(rbtree, nbObjectAdd));
+    service.shutdown();
+    while (!service.isTerminated()){}
+
+
     PrintWriter writer = new PrintWriter(name + ".dot");
     writer.println(rbtree.toDOT(name));
     writer.close();

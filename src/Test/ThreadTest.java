@@ -1,20 +1,17 @@
 package Test;
 
-public class ThreadTest extends Thread{
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-	public ThreadTest (String name)
+public class ThreadTest{
+
+	public ThreadTest ()
 	{
-		super(name);
 	}
 
 
-	public void run ()
+	public void test ()
 	{
-		for (int i=0; i<10; i++)
-		{
-			System.out.println(this.getName());
-		}
+
 	}
-	
-	
 }
