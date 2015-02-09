@@ -34,7 +34,7 @@ import java.util.ArrayDeque;
  * @author Frédéric Fauberteau
  *
  */
-public class BinarySearchTree<E extends Comparable<E>> extends Thread {
+public class BinarySearchTree<E extends Comparable<E>>{
   
   private BinarySearchNode<E> root;
   
@@ -59,7 +59,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends Thread {
         x = x.getLeftChild();
       }
     }
-    BinarySearchNode<E> z = new BinarySearchNode<>(e);
+    BinarySearchNode<E> z = new BinarySearchNode<E>(e);
     if (y == null) {
       setRoot(z);
     } else {
@@ -83,7 +83,7 @@ public class BinarySearchTree<E extends Comparable<E>> extends Thread {
   }
   
   public String toDOT(String name) {
-    ArrayDeque<BinarySearchNode<E>> queue = new ArrayDeque<>();
+    ArrayDeque<BinarySearchNode<E>> queue = new ArrayDeque<BinarySearchNode<E>>();
     StringBuilder sb = new StringBuilder();
     if (getRoot() != null) {
       sb.append("graph ").append(name).append(" {\n");

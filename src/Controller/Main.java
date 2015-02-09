@@ -39,18 +39,22 @@ public class Main {
   
   public static final void main(String[] args) throws IOException {
     String name = "rbtree";
+
     Random rand = new Random();
-    BinarySearchTree<Integer> rbtree = new BinarySearchTree<>();
-    rbtree.add(43);
+
+    BinarySearchTree<Integer> rbtree = new BinarySearchTree<Integer>();
+
     Thread threads [] = new Thread [85];
+
     System.out.println("How many threads do you want to use :");
     Scanner scanner = new Scanner(System.in);
+
     int thread_number = scanner.nextInt();
     
     
     for (int i =0; i<thread_number; i++)
     {
-    	threads[i] = new Thread (new RunnableTree(rbtree, "Sekou", rand.nextInt(thread_number)+1));
+    	threads[i] = new Thread (new RunnableTree(rbtree, rand.nextInt(thread_number)+1));
     	threads[i].start();
     	System.out.println(threads[i].getState());
     	System.out.println(i);
@@ -62,11 +66,6 @@ public class Main {
     writer.close();
     ProcessBuilder builder = new ProcessBuilder("/usr/local/bin/dot", "-Tpdf", "-o", name + ".pdf", name + ".dot");
     builder.start();
-    
-    
-    
-    
-    
   }
   
 }

@@ -2,16 +2,14 @@ package Model;
 
 import Model.BinarySearchTree;
 
-public class RunnableTree implements Runnable {
+public class RunnableTree<E extends Comparable<E>> implements Runnable {
 	
-	private BinarySearchTree<Integer> tree;
-	private String name;
-	private int add;
+	private BinarySearchTree<E> tree;
+	private E add;
 	
-	public RunnableTree(BinarySearchTree<Integer> tree, String name, int a)
+	public RunnableTree(BinarySearchTree<E> tree, E a)
 	{
 		this.tree = tree;
-		this.name = name;
 		this.add = a;
 	}
 	
@@ -19,6 +17,7 @@ public class RunnableTree implements Runnable {
 	public void run()
 	{
 		tree.add(add);
+		System.out.print("Ajout de :" +  add + "\n");
 
 	}
 	
